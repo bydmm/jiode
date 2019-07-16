@@ -1,10 +1,11 @@
 package client
 
+
 import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"mosos/model"
+	"github.com/bydmm/mosos/model"
 	"net/url"
 	"os"
 	"os/signal"

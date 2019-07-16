@@ -3,7 +3,7 @@ package server
 import (
 	"encoding/json"
 	"fmt"
-	"mosos/model"
+	"github.com/bydmm/mosos/model"
 	"os"
 
 	"github.com/gin-gonic/gin"

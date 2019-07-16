@@ -1,4 +1,4 @@
-module mosos
+module github.com/bydmm/mosos
 
 go 1.12
 

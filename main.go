@@ -2,8 +2,9 @@ package main
 
 import (
 	"flag"
-	"mosos/client"
-	"mosos/server"
+
+	"github.com/bydmm/mosos/client"
+	"github.com/bydmm/mosos/server"
 
 	"github.com/joho/godotenv"
 )
