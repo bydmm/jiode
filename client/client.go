@@ -1,23 +1,21 @@
 package client
 
-
 import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"github.com/bydmm/mosos/model"
 	"net/url"
 	"os"
 	"os/signal"
 	"time"
 
+	"github.com/bydmm/mosos/model"
+
 	"github.com/gorilla/websocket"
 )
 
 // RunClient 客户端
-func RunClient(addr string, room string) {
-	token := os.Getenv("MOSOS_SECRET_TOKEN")
-
+func RunClient(addr string, room string, token string) {
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
 
