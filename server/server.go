@@ -67,5 +67,5 @@ func RunServer() {
 		})
 	})
 
-	r.Run(":5000")
+	r.Run()
 }
