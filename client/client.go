@@ -9,7 +9,7 @@ import (
 	"os/signal"
 	"time"
 
-	"github.com/bydmm/mosos/model"
+	"github.com/bydmm/jiode/model"
 
 	"github.com/gorilla/websocket"
 )

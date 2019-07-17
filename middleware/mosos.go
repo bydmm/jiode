@@ -29,8 +29,8 @@ type Message struct {
 	Msg    string `json:"m"`
 }
 
-// MososLogger 日志格式化函数
-func MososLogger() gin.HandlerFunc {
+// jiodeLogger 日志格式化函数
+func jiodeLogger() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Start timer
 		start := time.Now()
@@ -62,16 +62,16 @@ func MososLogger() gin.HandlerFunc {
 		}
 		json, _ := json.Marshal(log)
 		go func(json string) {
-			SendToMosos(json)
+			SendTojiode(json)
 		}(string(json))
 	}
 }
 
-// SendToMosos 发送给mosos
-func SendToMosos(payload string) {
-	addr := os.Getenv("MOSOS_ADDR")
-	room := os.Getenv("MOSOS_ROOM")
-	token := os.Getenv("MOSOS_SECRET_TOKEN")
+// SendTojiode 发送给jiode
+func SendTojiode(payload string) {
+	addr := os.Getenv("JIODEADDR")
+	room := os.Getenv("JIODEROOM")
+	token := os.Getenv("JIODESECRET_TOKEN")
 
 	u := url.URL{
 		Scheme: "http",

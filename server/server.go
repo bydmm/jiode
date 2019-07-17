@@ -3,8 +3,10 @@ package server
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/bydmm/mosos/model"
 	"os"
+
+	"github.com/bydmm/jiode/model"
+	"github.com/bydmm/jiode/util"
 
 	"github.com/gin-gonic/gin"
 	"gopkg.in/olahol/melody.v1"
@@ -22,7 +24,10 @@ func HandleLogin(room string, s *melody.Session) {
 // RunServer 运行服务器
 func RunServer() {
 	MelodyInit()
-	token := os.Getenv("MOSOS_SECRET_TOKEN")
+	token := os.Getenv("JIODESECRET_TOKEN")
+	if token == "" {
+		token = util.RandStringRunes(6)
+	}
 
 	r := gin.Default()
 

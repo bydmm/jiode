@@ -1,4 +1,4 @@
-module github.com/bydmm/mosos
+module github.com/bydmm/jiode
 
 go 1.12
 
