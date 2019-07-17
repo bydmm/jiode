@@ -10,7 +10,6 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o jiode
 
 FROM alpine:3.7
 
-ENV GIN_MODE="release"
 ENV PORT=3000
 
 RUN echo "http://mirrors.aliyun.com/alpine/v3.7/main/" > /etc/apk/repositories && \

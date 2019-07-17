@@ -9,7 +9,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var serv = flag.Bool("s", false, "server mode")
+var cli = flag.Bool("c", false, "client mode")
 var addr = flag.String("addr", "localhost:5000", "server host")
 var room = flag.String("room", "all", "log channel")
 var token = flag.String("token", "", "jiode token")
@@ -20,9 +20,9 @@ func main() {
 
 	flag.Parse()
 
-	if serv != nil && *serv == true {
-		server.RunServer()
-	} else {
+	if cli != nil && *cli == true {
 		client.RunClient(*addr, *room, *token)
+	} else {
+		server.RunServer()
 	}
 }
