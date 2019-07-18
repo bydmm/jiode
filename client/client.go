@@ -44,7 +44,17 @@ func RunClient(addr string, room string, token string) {
 			}
 			var msg model.Message
 			json.Unmarshal(message, &msg)
-			log.Printf("%s: %s", msg.Client, msg.Msg)
+
+			loc := time.FixedZone("UTC-8", +8*60*60)
+			time := time.Now().In(loc).Format("2006/01/02 - 15:04:05")
+			var v interface{}
+			err = json.Unmarshal([]byte(msg.Msg), &v)
+			if err == nil {
+				body, _ := json.MarshalIndent(v, "", "  ")
+				fmt.Printf("%s %s\n %s\n", time, msg.Client, body)
+			} else {
+				fmt.Printf("%s %s\n %s\n", time, msg.Client, msg.Msg)
+			}
 		}
 	}()
 
