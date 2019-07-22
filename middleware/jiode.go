@@ -15,8 +15,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// JSONLog JSON格式的log
-type JSONLog struct {
+// Message 消息
+type Message struct {
+	Client string `json:"c"`
+	Msg    string `json:"m"`
+}
+
+// JSONDumpLog JSON格式的log
+type JSONDumpLog struct {
 	Time    string          `json:"time"`
 	Status  int             `json:"status"`
 	Method  string          `json:"method"`
@@ -27,14 +33,8 @@ type JSONLog struct {
 	ResBody json.RawMessage `json:"res_body"`
 }
 
-// Message 消息
-type Message struct {
-	Client string `json:"c"`
-	Msg    string `json:"m"`
-}
-
-// JiodeLogger 日志格式化函数
-func JiodeLogger() gin.HandlerFunc {
+// JSONDump 日志格式化函数
+func JSONDump() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// Start timer
 		start := time.Now()
@@ -76,7 +76,7 @@ func JiodeLogger() gin.HandlerFunc {
 			path = path + "?" + raw
 		}
 
-		log := JSONLog{
+		log := JSONDumpLog{
 			Time:    end.Format("2006/01/02 - 15:04:05"),
 			Status:  statusCode,
 			Cost:    int64(latency / 1e6),
@@ -89,13 +89,13 @@ func JiodeLogger() gin.HandlerFunc {
 
 		json, _ := json.Marshal(log)
 		go func(json string) {
-			SendTojiode(json)
+			Send(json)
 		}(string(json))
 	}
 }
 
-// SendTojiode 发送给jiode
-func SendTojiode(payload string) {
+// Send 发送给jiode server
+func Send(payload string) {
 	addr := os.Getenv("JIODE_ADDR")
 	room := os.Getenv("JIODE_ROOM")
 	token := os.Getenv("JIODE_SECRET_TOKEN")
