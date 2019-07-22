@@ -2,24 +2,14 @@ package middleware
 
 import (
 	"bytes"
-	"context"
 	"encoding/json"
-	"fmt"
 	"io"
 	"io/ioutil"
-	"net/http"
-	"net/url"
-	"os"
 	"time"
 
+	"github.com/bydmm/jiode/model"
 	"github.com/gin-gonic/gin"
 )
-
-// Message 消息
-type Message struct {
-	Client string `json:"c"`
-	Msg    string `json:"m"`
-}
 
 // JSONDumpLog JSON格式的log
 type JSONDumpLog struct {
@@ -89,40 +79,8 @@ func JSONDump() gin.HandlerFunc {
 
 		json, _ := json.Marshal(log)
 		go func(json string) {
-			Send(json)
+			model.Send(json)
 		}(string(json))
-	}
-}
-
-// Send 发送给jiode server
-func Send(payload string) {
-	addr := os.Getenv("JIODE_ADDR")
-	room := os.Getenv("JIODE_ROOM")
-	token := os.Getenv("JIODE_SECRET_TOKEN")
-	name := os.Getenv("JIODE_SERVICE_NAME")
-
-	u := url.URL{
-		Scheme: "http",
-		Host:   addr,
-		Path:   fmt.Sprintf("api/%s/%s", token, room),
-	}
-
-	message := Message{
-		Client: name,
-		Msg:    payload,
-	}
-	body, _ := json.Marshal(message)
-	req, err := http.NewRequest("POST", u.String(), bytes.NewReader(body))
-
-	req.Header.Add("Content-Type", "application/json")
-
-	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
-	defer cancel()
-	req = req.WithContext(ctx)
-
-	_, err = http.DefaultClient.Do(req)
-	if err != nil {
-		fmt.Println(err)
 	}
 }
 
