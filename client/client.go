@@ -51,7 +51,7 @@ func RunClient(addr string, room string, token string) {
 			err = json.Unmarshal([]byte(msg.Msg), &v)
 			if err == nil {
 				body, _ := json.MarshalIndent(v, "", "  ")
-				fmt.Printf("%s %s\n %s\n", time, msg.Client, body)
+				fmt.Printf("========================== %s %s ==========================\n %s\n", time, msg.Client, body)
 			} else {
 				fmt.Printf("%s %s\n %s\n", time, msg.Client, msg.Msg)
 			}
