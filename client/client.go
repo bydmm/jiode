@@ -22,7 +22,7 @@ func RunClient(addr string, room string, token string) {
 	u := url.URL{
 		Scheme: "ws",
 		Host:   addr,
-		Path:   fmt.Sprintf("ws/%s/%s", token, room),
+		Path:   fmt.Sprintf("ws/%s/join", token),
 	}
 	log.Printf("connecting to %s", u.String())
 
@@ -36,6 +36,8 @@ func RunClient(addr string, room string, token string) {
 
 	go func() {
 		defer close(done)
+		c.WriteMessage(websocket.TextMessage, []byte(room))
+
 		for {
 			_, message, err := c.ReadMessage()
 			if err != nil {
