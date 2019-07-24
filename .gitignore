@@ -2,3 +2,7 @@
 .env
 fabfile.py
 debug
+*.sh
+jiode_darwin
+jiode_linux
+jiode_win64.exe

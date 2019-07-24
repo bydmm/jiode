@@ -37,7 +37,7 @@ $ docker run bydmm/jiode -c -addr 120.x.x.x:7788 -room dev -token password
 # 启动日志总收集服务器，为日志生产者和日志查看者服务
 # JIODE_SECRET_TOKEN是密钥，作为接入这个服务的密码，避免滥用
 # -p 9999:3000 原服务启动在3000端口，然后我把他暴露在9999端口，记得开防火墙
-docker run -e JIODE_SECRET_TOKEN="123456" -p 9999:3000 bydmm/jiode
+docker run -e JIODE_SECRET_TOKEN="778899" -p 9999:3000 bydmm/jiode
 ```
 
 ```shell
@@ -89,9 +89,20 @@ POST localhost:5000/api/:token/:room
 ## 自行安装方法
 
 ```shell
+# go mod 安装大法
+export GO111MODULE=on
+export GOPROXY=https://mirrors.aliyun.com/goproxy/
+go get -u github.com/bydmm/jiode
+```
+
+```shell
+# 下载安装大法
 git clone https://github.com/bydmm/jiode
 go install
-export JIODESECRET_TOKEN="abcdef" # 设置接入token, 免得别人乱来。如果不设置也可以，jiode会随机给个otken
+export JIODE_SECRET_TOKEN="778899" # 设置接入token, 免得别人乱来。如果不设置也可以，jiode会随机给个otken
 jiode # 启动jiode接受服务器，一般在公网云端启动
 ```
+
+
+
 
