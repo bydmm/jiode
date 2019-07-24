@@ -1,6 +1,35 @@
-# jiode
+# jiode(脚得)
 
-便利的日志系统
+在你本机的命令行直接查看远端服务器日志的利器
+
+## jiode是做什么的
+
+总感觉前后端有扯不尽的皮，丢不完的锅。每天登陆跳板机，看个日志还要输入验证码真的好累啊！！！
+
+没问题，使用jiode，别你jio得你传了，直接在本机命令行看远端日志吧。
+
+## 效果演示
+```bash
+$ docker run bydmm/jiode -c -addr 120.x.x.x:7788 -room dev -token password
+2019/07/24 05:08:30 connecting to ws://120.x.x.x:7788/ws/password/join
+========================== 2019/07/24 - 13:05:01 内网api-dev ==========================
+ {
+  "cost": 0,
+  "ip": "192.168.80.1",
+  "method": "GET",
+  "path": "/api/v1/blog/my?timestamp=1563944701220",
+  "req_body": {},
+  "res_body": {
+    "code": 0,
+    "data": {
+      "templates": []
+    },
+    "result": ""
+  },
+  "status": 200,
+  "time": "2019/07/24 - 05:05:01"
+}
+```
 
 ## Docker启动方法
 
