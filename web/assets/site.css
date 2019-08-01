@@ -15,10 +15,7 @@
   color: #fff;
 }
 .big-log {
-  max-height: 90%;
-  width: 80%;
-  position: absolute;
-  overflow-y: auto;
+  max-height: inherit;
 }
 .other-message {
 }
