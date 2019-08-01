@@ -15,9 +15,10 @@ $("#js-join-room").click(function(){
 });
 
 $("#js-logs").on("click", ".js-log-view", function(){
-  console.log(this);
-  // $(".js-log-view").removeClass("big-log");
   $(this).toggleClass("big-log");
+  document.querySelectorAll('.big-log pre').forEach((block) => {
+    hljs.highlightBlock(block);
+  });
 });
 
 function StartWs(token) {
@@ -29,9 +30,6 @@ function StartWs(token) {
   socket.addEventListener('message', function (event) {
       const log = JSON.parse(event.data);
       AddLogs(log);
-      document.querySelectorAll('pre').forEach((block) => {
-        hljs.highlightBlock(block);
-      });
   });
 }
 
