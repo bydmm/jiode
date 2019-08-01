@@ -15,11 +15,13 @@ ENV PORT=3000
 RUN echo "http://mirrors.aliyun.com/alpine/v3.7/main/" > /etc/apk/repositories && \
     apk update && \
     apk add ca-certificates && \
-    echo "hosts: files dns" > /etc/nsswitch.conf
+    echo "hosts: files dns" > /etc/nsswitch.conf \
+    mkdir -p /www/web
 
 WORKDIR /www
 
 COPY --from=build /jiode/jiode /usr/bin/jiode
+COPY ./web /www/web
 
 RUN chmod +x /usr/bin/jiode
 

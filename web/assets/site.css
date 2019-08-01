@@ -1,0 +1,23 @@
+.warp {
+  width: 80%;
+  margin: 0 auto;
+}
+.hide {
+  display: none;
+}
+.log {
+  margin: 10px 0;
+  border-radius: 2px;
+  word-break: break-all;
+  max-height: 100px;
+  overflow: hidden;
+}
+.big-log {
+  max-height: 90%;
+  width: 80%;
+  position: absolute;
+  overflow-y: auto;
+}
+.other-message {
+  background: #444;
+}

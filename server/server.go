@@ -72,5 +72,8 @@ func RunServer() {
 		})
 	})
 
+	r.Static("/assets", "./web/assets")
+	r.StaticFile("/", "./web/index.html")
+
 	r.Run()
 }
